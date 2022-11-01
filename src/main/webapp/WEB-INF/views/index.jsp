@@ -11,6 +11,16 @@
     <title>index.jsp</title>
 </head>
 <body>
-<a href="/board/save">글작성</a>
+<button class="btn btn-primary" onclick="saveFn()">글작성</button>
+<button class="btn btn-primary" onclick="findAllFn()">글목록 출력</button>
+
 </body>
+<script>
+const saveFn = () => {
+    location.href="/board/save";
+}
+const findAllFn = () => {
+    location.href="/board/";
+}
+</script>
 </html>

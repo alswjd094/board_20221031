@@ -8,7 +8,18 @@
         insert into board_table(boardWriter,boardPass,boardTitle,boardContents)
         values (#{boardWriter}, #{boardPass},#{boardTitle},#{boardContents})
     </insert>
-
+    <select id="boardForm" resultType="board" parameterType="board">
+        select * from board_table
+    </select>
+    <select id="findById" resultType="board" parameterType="board">
+    select * from board_table where id=#{id}
+    </select>
+    <update id="findByHits">
+        update board_table set boardHits = boardHits+1 where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Long">
+        delete from board_table where id=#{id}
+    </delete>
 </mapper>
 
 

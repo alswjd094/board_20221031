@@ -13,6 +13,6 @@ public class BoardDTO {
     private String boardPass;
     private String boardTitle;
     private String boardContents;
-    private String boardCreatedDate;
+    private java.time.LocalDateTime boardCreatedDate;
     private int boardHits;
 }
