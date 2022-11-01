@@ -11,19 +11,23 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.css">
     <title>boardSave.jsp</title>
     <style>
-        
+        #write-form{
+            width: 800px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-<div class="container">
+<jsp:include page="layout/header.jsp" flush="false"></jsp:include>
+<div class="container" id="write-form">
     <form action="/board/save" method="post" name="saveForm">
 <input type="text" name="boardWriter" placeholder="작성자" class="form-control">
         <span id="writer-input-check"></span>
-<input type="text" name="boardPass" placeholder="글비밀번호" class="form-control">
+<input type="text" name="boardPass" placeholder="비밀번호" class="form-control">
         <span id="pass-input-check"></span>
 <input type="text" name="boardTitle" placeholder="제목" class="form-control">
         <span id="title-input-check"></span>
-<input type="text" name="boardContents" placeholder="내용" class="form-control">
+<textarea name="boardContents" cols="30" rows="10" placeholder="내용을 입력하세요." class="form-control"></textarea>
         <span id="contents-input-check"></span>
 <input type="button" value="저장" onclick="save()" class="btn btn-primary">
 </form>

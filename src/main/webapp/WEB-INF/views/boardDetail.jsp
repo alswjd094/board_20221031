@@ -6,14 +6,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>boardDetail.jsp</title>
   <link rel="stylesheet" href="/resources/css/bootstrap.css">
+  <style>
+    #detail{
+      width: 800px;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <table class="table table-striped">
+<jsp:include page="layout/header.jsp" flush="false"></jsp:include>
+<div class="container" id="detail">
+  <table class="table table-striped table-hover text-center">
     <tr>
       <th>번호</th>
       <td>${findById.id}</td>
@@ -36,13 +44,30 @@
     </tr>
     <tr>
       <th>작성시간</th>
-      <td>${findById.boardCreatedDate}</td>
+      <td><fmt:formatDate value="${findById.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss" ></fmt:formatDate></td>
     </tr>
     <tr>
       <th>조회수</th>
       <td>${findById.boardHits}</td>
     </tr>
   </table>
+  <button class="btn btn-primary" onclick="listFn()">목록</button>
+  <button class="btn btn-warning" onclick="updateFn()">수정</button>
+  <button class="btn btn-danger" onclick="deleteFn(${board.id})">삭제</button>
+
 </div>
 </body>
+<script>
+  const listFn = () => {
+    location.href="/board/";
+  }
+  const updateFn = () => {
+    location.href="";
+  }
+  const deleteFn = (clickedId) => {
+    console.log('${findAll}');
+    location.href="/board/delete?id="+clickedId;
+  }
+
+</script>
 </html>

@@ -14,7 +14,7 @@
     <select id="findById" resultType="board" parameterType="board">
     select * from board_table where id=#{id}
     </select>
-    <update id="findByHits">
+    <update id="findByHits" parameterType="Long">
         update board_table set boardHits = boardHits+1 where id=#{id}
     </update>
     <delete id="delete" parameterType="Long">

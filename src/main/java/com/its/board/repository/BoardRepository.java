@@ -20,8 +20,6 @@ public class BoardRepository {
     }
 
     public BoardDTO findById(Long id) {
-        BoardDTO result = null;
-
         return sql.selectOne("Board.findById",id);
     }
 
