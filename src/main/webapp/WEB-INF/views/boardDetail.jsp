@@ -53,8 +53,7 @@
   </table>
   <button class="btn btn-primary" onclick="listFn()">목록</button>
   <button class="btn btn-warning" onclick="updateFn()">수정</button>
-  <button class="btn btn-danger" onclick="deleteFn(${board.id})">삭제</button>
-
+  <button class="btn btn-danger" onclick="deleteFn()">삭제</button>
 </div>
 </body>
 <script>
@@ -62,11 +61,12 @@
     location.href="/board/";
   }
   const updateFn = () => {
-    location.href="";
+    const id = '${findById.id}';
+     location.href="/board/update?id="+id;
   }
-  const deleteFn = (clickedId) => {
-    console.log('${findAll}');
-    location.href="/board/delete?id="+clickedId;
+  const deleteFn = () => {
+    const id = '${findById.id}'
+    location.href="/board/deleteCheck?id="+id;
   }
 
 </script>

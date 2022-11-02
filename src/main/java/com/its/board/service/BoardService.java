@@ -28,14 +28,18 @@ public class BoardService {
         return boardRepository.boardForm();
     }
 
+    public void updateHits(Long id){
+        boardRepository.updateHits(id);
+    }
     public BoardDTO findById(Long id) {
-        sql.update("Board.findByHits",id);
         return boardRepository.findById(id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
     }
 
     public void delete(Long id) {
         boardRepository.delete(id);
     }
-
-
 }
