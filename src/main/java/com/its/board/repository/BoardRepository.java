@@ -11,8 +11,14 @@ import java.util.List;
 public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
-    public int boardSave(BoardDTO boardDTO) {
-        return sql.insert("Board.boardSave",boardDTO);
+    public BoardDTO boardSave(BoardDTO boardDTO) {
+        System.out.println("insert 전 boardDTO = " + boardDTO);
+        sql.insert("Board.boardSave",boardDTO);
+        System.out.println("insert 후 boardDTO = " + boardDTO);
+        return boardDTO;
+    }
+    public void saveFileName(BoardDTO boardDTO) {
+        sql.insert("Board.saveFile",boardDTO);
     }
 
     public List<BoardDTO> boardForm() {
@@ -20,7 +26,12 @@ public class BoardRepository {
     }
 
     public BoardDTO findById(Long id) {
-        return sql.selectOne("Board.findById",id);
+        BoardDTO boardDTO = sql.selectOne("Board.findById",id);
+        if(boardDTO.getFileAttached()==1){
+            return sql.selectOne("Board.findByIdFile",id);
+        } else{
+            return boardDTO;
+        }
     }
     public void updateHits(Long id) {
         sql.update("Board.findByHits",id);
@@ -32,6 +43,7 @@ public class BoardRepository {
     public void delete(Long id) {
          sql.delete("Board.delete",id);
     }
+
 
 
 }

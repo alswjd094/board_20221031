@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -26,13 +27,9 @@ public class BoardController {
         }
 
         @PostMapping("/save")
-        public String boardSave (@ModelAttribute BoardDTO boardDTO){
-            boolean boardSaveResult = boardService.boardSave(boardDTO);
-            if (boardSaveResult) {
+        public String boardSave (@ModelAttribute BoardDTO boardDTO) throws IOException {
+            boardService.boardSave(boardDTO);
                 return "redirect:/board/";
-            } else {
-                return "saveFalse";
-            }
         }
 
         @GetMapping("/")
@@ -47,6 +44,7 @@ public class BoardController {
             boardService.updateHits(id);
             BoardDTO findByIdResult = boardService.findById(id);
             model.addAttribute("findById", findByIdResult);
+            System.out.println("조회: findByIdResult = " + findByIdResult);
             return "boardDetail";
         }
 

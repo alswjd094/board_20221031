@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
@@ -42,6 +43,15 @@
       <th>내용</th>
       <td>${findById.boardContents}</td>
     </tr>
+    <c:if test="${findById.storedFileName != null}">
+    <tr>
+      <th>파일</th>
+      <td>
+        <img src="${pageContext.request.contextPath}/upload/${findById.storedFileName}" alt="" width="100" height="100">
+               <%--${현재 프로젝트의 루트 경로}/servlet에서 지정한 경로/${해당위치에 있는 파일의 이름}--%>
+      </td>
+    </tr>
+    </c:if>
     <tr>
       <th>작성시간</th>
       <td><fmt:formatDate value="${findById.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss" ></fmt:formatDate></td>

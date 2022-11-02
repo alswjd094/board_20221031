@@ -20,7 +20,7 @@
 <body>
 <jsp:include page="layout/header.jsp" flush="false"></jsp:include>
 <div class="container" id="write-form">
-    <form action="/board/save" method="post" name="saveForm">
+    <form action="/board/save" method="post" name="saveForm" enctype="multipart/form-data">
 <input type="text" name="boardWriter" placeholder="작성자" class="form-control">
         <span id="writer-input-check"></span>
 <input type="text" name="boardPass" placeholder="비밀번호" class="form-control">
@@ -29,6 +29,7 @@
         <span id="title-input-check"></span>
 <textarea name="boardContents" cols="30" rows="10" placeholder="내용을 입력하세요." class="form-control"></textarea>
         <span id="contents-input-check"></span>
+<input type="file" class="form-control" name="boardFile">
 <input type="button" value="저장" onclick="save()" class="btn btn-primary">
 </form>
 </div>
