@@ -37,7 +37,7 @@
                 <td><a href="/board?id=${board.id}">${board.boardTitle}</a></td>
                 <td>${board.boardContents}</td>
                 <td>
-                    <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss" ></fmt:formatDate>
+                    <fmt:formatDate value="${board.boardCreatedDate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate>
                 </td>
             </tr>
         </c:forEach>

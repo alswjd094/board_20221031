@@ -1,6 +1,8 @@
 package com.its.board.service;
 
+import com.its.board.commons.PagingConst;
 import com.its.board.dto.BoardDTO;
+import com.its.board.dto.PageDTO;
 import com.its.board.repository.BoardRepository;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardService {
@@ -65,5 +69,44 @@ public class BoardService {
 
     public void delete(Long id) {
         boardRepository.delete(id);
+    }
+
+    public List<BoardDTO> pagingList(int page) {
+        /*
+        page = 1페이지 -> (0, )
+        page = 2페이지 -> (3, )
+        page = 3페이지 -> (6, )
+         */
+        int pagingStart = (page-1) * PagingConst.PAGE_LIMIT;
+                                    //클래스이름.상수이름;
+        //두 개이상의 데이터를 매퍼에 한번에 보낼때(담는 값의 타입이 같아야 함)
+        Map<String, Integer> pagingParams = new HashMap<>();
+        //값 담기
+        pagingParams.put("start",pagingStart);
+        pagingParams.put("limit", PagingConst.PAGE_LIMIT);
+        List<BoardDTO> pagingList = boardRepository.pagingList(pagingParams);
+        return pagingList;
+    }
+
+    public PageDTO pagingParam(int page) {
+        //전체 글 개수 조회
+        int boardCount = boardRepository.boardCount();
+        //전체 페이지 개수 계산
+        int maxPage = (int) (Math.ceil((double) boardCount / PagingConst.PAGE_LIMIT));
+        //시작 페이지 값 계산(1, 4, 7, 10, ---)
+        int startPage = (((int)(Math.ceil((double) page / PagingConst.BLOCK_LIMIT))) - 1) * PagingConst.BLOCK_LIMIT + 1;
+        //끝 페이지 값 계산(3, 6, 9, 12---)
+        int endPage = startPage + PagingConst.BLOCK_LIMIT - 1;
+        if(endPage >maxPage){
+            endPage = maxPage;
+            //end페이지 값이 max값보다 크다면 end페이지값을 max값으로 덮어쓴다.
+        }
+        //dto로 담아 가야함
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setMaxPage(maxPage);
+        pageDTO.setStartPage(startPage);
+        pageDTO.setEndPage(endPage);
+        return pageDTO;
     }
 }

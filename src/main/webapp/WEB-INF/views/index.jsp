@@ -13,10 +13,10 @@
 <body>
 <button class="btn btn-primary" onclick="saveFn()">글작성</button>
 <button class="btn btn-primary" onclick="findAllFn()">글목록 출력</button>
-<%--글작성      회원가입
-    /save       /save
-    /boardSave  /memberSave
-    /board/save /member/save--%>
+<a href="/board/paging">페이징목록</a>
+<a href="/board/paging?page=10">페이징목록</a>
+<a href="/board/paging?page=3">페이징목록</a>
+
 </body>
 <script>
 const saveFn = () => {

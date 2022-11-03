@@ -1,6 +1,7 @@
 package com.its.board.controller;
 
 import com.its.board.dto.BoardDTO;
+import com.its.board.dto.PageDTO;
 import com.its.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,20 @@ public class BoardController {
             List<BoardDTO> boardDTO = boardService.boardForm();
             model.addAttribute("findAll", boardDTO);
             return "boardList";
+        }
+
+        @GetMapping("/paging")
+        public String paging(Model model,
+                             @RequestParam(value = "page",required = false, defaultValue = "1") int page){
+        //value: 받으려는 파라미터 이름, required: 파라미터가 필수인가 아닌가, defaultValue: 필수는 아니지만 오지 않았을 경우 기본값, 1페이지
+//            System.out.println("page = " + page);
+            //해당 페이지에서 보여줄 글 목록
+            List<BoardDTO> pagingList = boardService.pagingList(page);
+            //하단 페이지 번호 표현을 위한 데이터
+            PageDTO pageDTO = boardService.pagingParam(page);
+            model.addAttribute("findAll",pagingList);
+            model.addAttribute("paging", pageDTO);
+            return "boardPaging";
         }
 
         @GetMapping
