@@ -93,6 +93,12 @@ public class BoardController {
     public String delete (@RequestParam("id") Long id) {
         boardService.delete(id);
         return "redirect:/board/";
-
     }
+    @GetMapping("/search")
+    public String search(@RequestParam("type") String type, @RequestParam("q") String q, Model model){
+            List<BoardDTO> searchList = boardService.search(type,q);
+            model.addAttribute("findAll",searchList);
+            return"boardList";
+    }
+
     }
