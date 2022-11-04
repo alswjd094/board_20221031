@@ -1,8 +1,10 @@
 package com.its.board.controller;
 
 import com.its.board.dto.BoardDTO;
+import com.its.board.dto.CommentDTO;
 import com.its.board.dto.PageDTO;
 import com.its.board.service.BoardService;
+import com.its.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private CommentService commentService;
 
 
 //    @GetMapping("/board/save") //@RequestMapping X
@@ -62,6 +66,9 @@ public class BoardController {
             model.addAttribute("page",page);
             model.addAttribute("findById", findByIdResult);
             System.out.println("조회: findByIdResult = " + findByIdResult);
+            //commentService 불러오기
+            List<CommentDTO> commentDTOList = commentService.findAllComment(id);
+            model.addAttribute("commentList",commentDTOList);
             return "boardDetail";
         }
 
